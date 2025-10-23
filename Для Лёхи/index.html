@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Лёха Морфлот — One Page</title>
+  <!-- Шрифты -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/css/splide.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <div class="logo"><img class="logo" src="assets/images/photo_2025-09-27_23-56-37.jpg" alt=""></div>
+      <div>
+        <div style="font-weight:800">Лёха Морфлот</div>
+        <div style="font-size:12px;color:var(--muted)">18 лет • будущий ревизор (фармацевт)</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#about">Обо мне</a>
+      <a href="#gallery-section">Галерея</a>
+      <a href="#news">Новости</a>
+      <a href="#skills">Увлечения</a>
+      <a href="#contact">Контакты</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="hero-left">
+        <div class="card">
+          <h1 id="title">Привет, я <span class="neon">Лёха</span></h1>
+          <p class="lead">Люблю качалку, современный русский рэп и поп. Учусь на ревизора (фармацевта), целеустремлён и постоянен в тренировках.</p>
+          <div class="chips">
+            <div class="chip">Качалка 💪</div>
+            <div class="chip">Русский рэп & поп 🎧</div>
+            <div class="chip">Фармацевтика 🧪</div>
+            <div class="chip">Неон & Ночь 🌌</div>
+          </div>
+          <div class="about">
+            <div class="stat clickable-stat" data-modal="training"><h3>Тренировки</h3><p>5x в неделю</p></div>
+            <div class="stat clickable-stat" data-modal="profession"><h3>Профессия</h3><p>Ревизор / Фармацевт (студент)</p></div>
+          </div>
+          <div style="margin-top:18px">
+            <button class="btn primary magnetic" onclick="openContact()">Связаться</button>
+            <button class="btn magnetic" style="margin-left:12px" onclick="toggleTheme()">Переключить неон</button>
+          </div>
+          <div class="playlist" style="margin-top:18px">
+            <h3 style="font-size:14px;color:var(--muted)">Плейлист дня ♫</h3>
+            <audio id="player" controls style="width:100%;border-radius:10px;background:rgba(255,255,255,0.02)"></audio>
+            <div style="display:flex;gap:10px;margin-top:8px">
+              <button class="btn magnetic" onclick="prevSong()">⏮</button>
+              <button class="btn primary magnetic" onclick="togglePlay()">▶️ / ⏸</button>
+              <button class="btn magnetic" onclick="nextSong()">⏭</button>
+            </div>
+            <div id="nowPlaying" style="margin-top:6px;font-size:13px;color:var(--muted)">
+              Сейчас играет: <span id="trackName">—</span>
+            </div>
+          </div>
+          <div style="margin-top:18px;color:var(--muted);font-size:13px">
+            Плейлист: <em>современный русский рэп</em>.
+          </div>
+        </div>
+      </div>
+      <div class="card hero-portrait">
+        <div class="portrait" id="portrait">
+          <img src="assets/images/photo_2025-10-22_23-21-21.jpg" alt="portrait" />
+          <div style="position:absolute;left:12px;bottom:12px;padding:10px 14px;border-radius:12px;background:linear-gradient(90deg,rgba(0,0,0,0.4),transparent);backdrop-filter:blur(6px)">
+            <div style="font-weight:800">Лёха, 18</div>
+            <div style="font-size:12px;color:var(--muted)">Ревизор / культурист</div>
+          </div>
+        </div>
+                  <div id="about" style="margin-top:20px">
+            <h2 style="margin-top:0">Обо мне</h2>
+            <p style="color:var(--muted)">Я — студент фармацевтического направления, совмещаю учёбу с регулярными тренировками в зале и интересом к музыке. Готов развивать карьеру и делиться вдохновением.</p>
+            <p style="margin-top:12px;color:var(--muted)"><strong>Цитата:</strong> "Труд и дисциплина — мои лучшие друзья."</p>
+          </div>
+      </div>
+    </section>
+
+<section class="section-mask news-section-bg" id="news">
+  <h2>Новости из жизни</h2>
+  <div id="news-swiper" class="swiper news-swiper-vertical">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <img src="assets/images/photo_2025-10-22_23-20-58.jpg" alt="Сессия закрыта"
+             style="width:100%;max-width:100%;height:220px;object-fit:cover;border-radius:16px 16px 0 0;margin-bottom:0">
+        <div class="news-content">
+          <h3>Сессия закрыта 🎓</h3>
+          <div class="news-text">
+            <p>Лёха успешно сдал все экзамены за осенний семестр! Впереди заслуженный отдых, усиленные тренировки, новые свершения и свежие музыкальные открытия. В ближайших планах – выйти на новый рекорд по жиму и попробовать себя в новом турнире среди студентов.</p>
+            <p>Отдыхать важно, но учёба и самодисциплина — всегда на первом месте. Спасибо педагогу за поддержку на экзаменах!</p>
+          </div>
+          <a class="news-link" href="https://university.example.com/news/closed-session" target="_blank">Источник новости</a>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="assets/images/photo_2025-10-22_23-21-10.jpg" alt="Новый рекорд"
+             style="width:100%;max-width:100%;height:220px;object-fit:cover;border-radius:16px 16px 0 0;margin-bottom:0">
+        <div class="news-content">
+          <h3>Новый рекорд 💪</h3>
+          <div class="news-text">
+            <p>110 кг в жиме лёжа — установлено в университете, на межфакультетском турнире по силовым видам спорта (21 октября). Работа над ошибками, восстанавливающий сон и правильное питание помогли выйти на пик формы.</p>
+            <p>На очереди подтягивания и планка — не останавливаемся на достигнутом!</p>
+          </div>
+          <a class="news-link" href="https://sport-news.example.com/record" target="_blank">Источник новости</a>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="assets/images/photo_2025-10-22_23-21-13.jpg" alt="Поездка в горы"
+             style="width:100%;max-width:100%;height:220px;object-fit:cover;border-radius:16px 16px 0 0;margin-bottom:0">
+        <div class="news-content">
+          <h3>Поездка в горы 🏔️</h3>
+          <div class="news-text">
+            <p>Осенние выходные в горах с друзьями — свежий воздух, утренние пробежки с видом на вершины и позитивное настроение на всю неделю. Запомнилось дружеское чаепитие после похода, а главное — заряд энергии для новых целей.</p>
+            <p>"Честно, такие поездки мотивируют к движению вперёд и укрепляют дружбу на всю жизнь!"</p>
+          </div>
+          <a class="news-link" href="https://travel-blog.example.com/alps2025" target="_blank">Источник новости</a>
+        </div>
+      </div>
+    </div>
+    <!-- Навигация и пагинация -->
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+</section>
+
+
+
+    <section class="section-mask" id="skills">
+      <h2>Увлечения</h2>
+      <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:16px">
+        <div class="stat clickable-stat" data-modal="gym" style="flex:1;min-width:230px">
+          <img src="assets/images/photo_2025-10-22_23-21-24.jpg" alt="Качалка" style="width:100%;height:140px;object-fit:cover;border-radius:10px;margin-bottom:10px">
+          <h3>Качалка 💪</h3>
+          <p>Тренировки 5x в неделю, прогресс — главное!</p>
+        </div>
+        <div class="stat clickable-stat" data-modal="csgo" style="flex:1;min-width:230px">
+          <img src="assets/images/photo_2025-10-22_23-21-29.jpg" alt="CS:GO" style="width:100%;height:140px;object-fit:cover;border-radius:10px;margin-bottom:10px">
+          <h3>CS:GO 🔫</h3>
+          <p>Люблю соревноваться и выигрывать, стрелять headshot!</p>
+        </div>
+        <div class="stat clickable-stat" data-modal="hearthstone" style="flex:1;min-width:230px">
+          <img src="assets/images/photo_2025-10-22_23-21-10.jpg" alt="Hearthstone" style="width:100%;height:140px;object-fit:cover;border-radius:10px;margin-bottom:10px">
+          <h3>Hearthstone 🃏</h3>
+          <p>Кручу колоды, ищу новые схемы игры.</p>
+        </div>
+        <div class="stat clickable-stat" data-modal="university" style="flex:1;min-width:230px">
+          <img src="assets/images/photo_2025-10-22_23-20-58.jpg" alt="Университет" style="width:100%;height:140px;object-fit:cover;border-radius:10px;margin-bottom:10px">
+          <h3>Университет 🧑‍🎓</h3>
+          <p>Учусь на фармацевта, стремлюсь к развитию и знаниям.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-mask" id="map-section">
+      <h2>Любимые места (Пермь)</h2>
+      <div id="map"
+        tabindex="0"
+        style="height:800px;width:100%;border-radius:18px;margin-top:20px;cursor:pointer"></div>
+        
+    </section>
+
+        <section class="section-mask gallery-section" id="gallery-section">
+      <h2>Галерея</h2>
+      <div id="splide-gallery" class="splide gallery-centered">
+        <div class="splide__track">
+          <ul class="splide__list">
+            <li class="splide__slide"><img src="assets/images/photo_2025-09-27_23-56-37.jpg" alt="g1"></li>
+            <li class="splide__slide"><img src="assets/images/photo_2025-10-22_23-20-58.jpg" alt="g2"></li>
+            <li class="splide__slide"><img src="assets/images/photo_2025-10-22_23-21-10.jpg" alt="g3"></li>
+            <li class="splide__slide"><img src="assets/images/photo_2025-10-22_23-21-13.jpg" alt="g4"></li>
+            <li class="splide__slide"><img src="assets/images/photo_2025-10-22_23-21-19.jpg" alt="g5"></li>
+            <li class="splide__slide"><img src="assets/images/photo_2025-10-22_23-21-21.jpg" alt="g6"></li>
+            <li class="splide__slide"><img src="assets/images/photo_2025-10-22_23-21-24.jpg" alt="g7"></li>
+            <li class="splide__slide"><img src="assets/images/photo_2025-10-22_23-21-27.jpg" alt="g8"></li>
+            <li class="splide__slide"><img src="assets/images/photo_2025-10-22_23-21-29.jpg" alt="g9"></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-maskk" id="contact">
+      <h2>Контакты</h2>
+      <p style="color:var(--muted)">Напиши сообщение — или используй быстрые иконки соцсетей ниже.</p>
+      <form onsubmit="sendForm(event)" style="margin-top:14px;display:flex;gap:12px;flex-wrap:wrap">
+        <input id="f_name" required placeholder="Имя" style="padding:12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);min-width:220px;color:inherit">
+        <input id="f_email" required type="email" placeholder="Email" style="padding:12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);min-width:220px;color:inherit">
+        <textarea id="f_msg" required placeholder="Сообщение" rows="4" style="width:100%;padding:12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);color:inherit"></textarea>
+        <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
+          <button class="btn primary" type="submit">Отправить</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div>© Лёха Морфлот — 2025</div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <div class="btn" onclick="fakeOpen('vk')">VK</div>
+      <div class="btn" onclick="fakeOpen('tt')">TikTok</div>
+      <div class="btn" onclick="fakeOpen('tg')">Telegram</div>
+      <div class="btn" onclick="fakeOpen('ig')">Instagram</div>
+    </div>
+  </footer>
+
+  <!-- Модальное окно -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <div class="modal-header">
+        <h2 id="modal-title">Заголовок</h2>
+      </div>
+      <div class="modal-body">
+        <div id="modal-image"></div>
+        <div id="modal-text"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Библиотеки JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/js/splide.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- Твой основной JS -->
+  <script src="main.js"></script>
+</body>
+</html>
