@@ -418,3 +418,309 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+// Анимации при прокрутке
+document.addEventListener('DOMContentLoaded', function() {
+  const animatedElements = document.querySelectorAll('.scroll-animate');
+  let ticking = false;
+
+  // Функция для проверки видимости элемента
+  function isElementInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    
+    return (
+      rect.top < windowHeight * 0.75 &&
+      rect.bottom > windowHeight * 0.25
+    );
+  }
+
+  // Функция анимации
+  function updateAnimations() {
+    animatedElements.forEach((element, index) => {
+      const isVisible = isElementInViewport(element);
+      
+      if (isVisible && !element.classList.contains('animate-in')) {
+        // Добавляем задержку для последовательного появления (ускорено в 2 раза)
+        setTimeout(() => {
+          element.classList.add('animate-in');
+          element.classList.remove('animate-out');
+        }, index * 75);
+      }
+    });
+    
+    ticking = false;
+  }
+
+  // Оптимизированная функция прокрутки
+  function handleScroll() {
+    if (!ticking) {
+      requestAnimationFrame(updateAnimations);
+      ticking = true;
+    }
+  }
+
+  // Обработчик прокрутки
+  window.addEventListener('scroll', handleScroll, { passive: true });
+
+  // Инициализация - показываем первый элемент сразу
+  if (animatedElements.length > 0) {
+    const firstElement = animatedElements[0];
+    if (isElementInViewport(firstElement)) {
+      firstElement.classList.add('animate-in');
+    }
+  }
+
+  // Дополнительная проверка через небольшую задержку
+  setTimeout(() => {
+    animatedElements.forEach((element, index) => {
+      if (isElementInViewport(element) && !element.classList.contains('animate-in')) {
+        setTimeout(() => {
+          element.classList.add('animate-in');
+        }, index * 50);
+      }
+    });
+  }, 500);
+
+  // Дополнительные эффекты для портрета (убрано для стабильности)
+  // const portrait = document.querySelector('.hero-portrait');
+  // if (portrait) {
+  //   window.addEventListener('scroll', function() {
+  //     const scrolled = window.pageYOffset;
+  //     const parallax = scrolled * 0.3;
+  //     portrait.style.transform = `translateY(${parallax}px)`;
+  //   }, { passive: true });
+  // }
+
+  // Эффект параллакса для фона (убрано для стабильности)
+  // const newsSection = document.querySelector('.news-section-bg');
+  // if (newsSection) {
+  //   window.addEventListener('scroll', function() {
+  //     const scrolled = window.pageYOffset;
+  //     const rect = newsSection.getBoundingClientRect();
+  //     const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+      
+  //     if (isVisible) {
+  //       const parallax = scrolled * 0.1;
+  //       newsSection.style.backgroundPosition = `center ${parallax}px`;
+  //     }
+  //   }, { passive: true });
+  // }
+
+  // Простые эффекты наведения для карточек (без вращения)
+  const cards = document.querySelectorAll('.card, .stat');
+  cards.forEach(card => {
+    card.addEventListener('mouseenter', function() {
+      card.style.transform = 'scale(1.02)';
+      card.style.transition = 'transform 0.3s ease';
+    });
+    
+    card.addEventListener('mouseleave', function() {
+      card.style.transform = 'scale(1)';
+    });
+  });
+
+  // Простые эффекты наведения для неоновых элементов (без частиц)
+  const neonElements = document.querySelectorAll('.neon');
+  neonElements.forEach(element => {
+    element.addEventListener('mouseenter', function() {
+      element.style.textShadow = '0 0 20px var(--neon), 0 0 40px var(--neon)';
+      element.style.transition = 'text-shadow 0.3s ease';
+    });
+    
+    element.addEventListener('mouseleave', function() {
+      element.style.textShadow = '0 0 30px rgba(155, 92, 255, 0.18)';
+    });
+  });
+
+  // Фиолетовый след за курсором (только для десктопа)
+  function createCursorTrail() {
+    // Проверяем, что это не мобильное устройство
+    if (window.innerWidth <= 768 || 'ontouchstart' in window) {
+      return;
+    }
+    
+    const trail = [];
+    const trailLength = 15; // Уменьшено для производительности
+    
+    // Создаем элементы следа
+    for (let i = 0; i < trailLength; i++) {
+      const dot = document.createElement('div');
+      dot.style.position = 'fixed';
+      dot.style.width = '6px';
+      dot.style.height = '6px';
+      dot.style.background = `radial-gradient(circle, rgba(155, 92, 255, ${1 - i / trailLength}) 0%, transparent 70%)`;
+      dot.style.borderRadius = '50%';
+      dot.style.pointerEvents = 'none';
+      dot.style.zIndex = '9999';
+      dot.style.transition = 'all 0.1s ease-out';
+      dot.style.opacity = '0';
+      document.body.appendChild(dot);
+      trail.push(dot);
+    }
+    
+    let mouseX = 0, mouseY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      
+      // Обновляем позиции элементов следа
+      trail.forEach((dot, index) => {
+        const delay = index * 0.03;
+        setTimeout(() => {
+          const offsetX = (Math.random() - 0.5) * 8;
+          const offsetY = (Math.random() - 0.5) * 8;
+          dot.style.left = (mouseX - 3 + offsetX) + 'px';
+          dot.style.top = (mouseY - 3 + offsetY) + 'px';
+          dot.style.opacity = (1 - index / trailLength) * 0.6;
+          dot.style.transform = `scale(${1 - index / trailLength})`;
+        }, delay * 1000);
+      });
+    });
+  }
+  
+  createCursorTrail();
+
+  // Эффекты при прокрутке
+  function addScrollEffects() {
+    let ticking = false;
+    
+    function updateScrollEffects() {
+      const scrolled = window.pageYOffset;
+      const rate = scrolled * -0.5;
+      
+      // Параллакс для фона
+      document.body.style.backgroundPosition = `center ${rate}px`;
+      
+      // Эффект для header
+      const header = document.querySelector('header');
+      if (header) {
+        if (scrolled > 100) {
+          header.style.background = 'rgba(11, 11, 18, 0.95)';
+          header.style.backdropFilter = 'blur(20px)';
+        } else {
+          header.style.background = 'transparent';
+          header.style.backdropFilter = 'blur(6px)';
+        }
+      }
+      
+      ticking = false;
+    }
+    
+    function requestTick() {
+      if (!ticking) {
+        requestAnimationFrame(updateScrollEffects);
+        ticking = true;
+      }
+    }
+    
+    window.addEventListener('scroll', requestTick, { passive: true });
+  }
+  
+  addScrollEffects();
+
+  // Фоновые анимации (адаптированные для мобильных)
+  function addBackgroundAnimations() {
+    // Проверяем размер экрана для оптимизации
+    const isMobile = window.innerWidth <= 768;
+    const particleCount = isMobile ? 8 : 15; // Меньше частиц на мобильных
+    
+    // Создаем плавающие частицы
+    function createFloatingParticles() {
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        const size = isMobile ? Math.random() * 2 + 1 : Math.random() * 4 + 2;
+        particle.style.position = 'fixed';
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.background = `rgba(155, 92, 255, ${Math.random() * 0.2 + 0.05})`;
+        particle.style.borderRadius = '50%';
+        particle.style.pointerEvents = 'none';
+        particle.style.zIndex = '1';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animation = `float ${Math.random() * 8 + 8}s linear infinite`;
+        particle.style.animationDelay = Math.random() * 8 + 's';
+        
+        document.body.appendChild(particle);
+      }
+    }
+    
+    // Добавляем CSS анимацию для частиц
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes float {
+        0% {
+          transform: translateY(100vh) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+    
+    createFloatingParticles();
+  }
+  
+  addBackgroundAnimations();
+
+  // Эффекты клика с волнами
+  function addClickEffects() {
+    document.addEventListener('click', function(e) {
+      const ripple = document.createElement('div');
+      const rect = e.target.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const x = e.clientX - rect.left - size / 2;
+      const y = e.clientY - rect.top - size / 2;
+      
+      ripple.style.position = 'absolute';
+      ripple.style.width = size + 'px';
+      ripple.style.height = size + 'px';
+      ripple.style.left = x + 'px';
+      ripple.style.top = y + 'px';
+      ripple.style.background = 'radial-gradient(circle, rgba(155, 92, 255, 0.3) 0%, transparent 70%)';
+      ripple.style.borderRadius = '50%';
+      ripple.style.pointerEvents = 'none';
+      ripple.style.animation = 'ripple 0.6s ease-out';
+      ripple.style.zIndex = '1000';
+      
+      e.target.style.position = 'relative';
+      e.target.style.overflow = 'hidden';
+      e.target.appendChild(ripple);
+      
+      setTimeout(() => {
+        if (ripple.parentNode) {
+          ripple.parentNode.removeChild(ripple);
+        }
+      }, 600);
+    });
+    
+    // Добавляем CSS анимацию для волн
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes ripple {
+        0% {
+          transform: scale(0);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+  
+  addClickEffects();
+});

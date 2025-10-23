@@ -31,7 +31,7 @@
   </header>
 
   <main>
-    <section class="hero" id="top">
+    <section class="hero scroll-animate from-left" id="top">
       <div class="hero-left">
         <div class="card">
           <h1 id="title">Привет, я <span class="neon">Лёха</span></h1>
@@ -43,8 +43,8 @@
             <div class="chip">Неон & Ночь 🌌</div>
           </div>
           <div class="about">
-            <div class="stat clickable-stat" data-modal="training"><h3>Тренировки</h3><p>5x в неделю</p></div>
-            <div class="stat clickable-stat" data-modal="profession"><h3>Профессия</h3><p>Ревизор / Фармацевт (студент)</p></div>
+            <div class="stat clickable-stat" data-modal="training" style="--animation-delay: 0"><h3>Тренировки</h3><p>5x в неделю</p></div>
+            <div class="stat clickable-stat" data-modal="profession" style="--animation-delay: 1"><h3>Профессия</h3><p>Ревизор / Фармацевт (студент)</p></div>
           </div>
           <div style="margin-top:18px">
             <button class="btn primary magnetic" onclick="openContact()">Связаться</button>
@@ -83,7 +83,7 @@
       </div>
     </section>
 
-<section class="section-mask news-section-bg" id="news">
+<section class="section-mask news-section-bg scroll-animate from-right" id="news">
   <h2>Новости из жизни</h2>
   <div id="news-swiper" class="swiper news-swiper-vertical">
     <div class="swiper-wrapper">
@@ -133,7 +133,7 @@
 
 
 
-    <section class="section-mask" id="skills">
+    <section class="section-mask scroll-animate from-top" id="skills">
       <h2>Увлечения</h2>
       <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:16px">
         <div class="stat clickable-stat" data-modal="gym" style="flex:1;min-width:230px">
@@ -159,7 +159,7 @@
       </div>
     </section>
 
-    <section class="section-mask" id="map-section">
+    <section class="section-mask scroll-animate from-bottom" id="map-section">
       <h2>Любимые места (Пермь)</h2>
       <div id="map"
         tabindex="0"
@@ -167,7 +167,7 @@
         
     </section>
 
-        <section class="section-mask gallery-section" id="gallery-section">
+        <section class="section-mask gallery-section scroll-animate from-left" id="gallery-section">
       <h2>Галерея</h2>
       <div id="splide-gallery" class="splide gallery-centered">
         <div class="splide__track">
@@ -186,7 +186,7 @@
       </div>
     </section>
 
-    <section class="section-maskk" id="contact">
+    <section class="section-maskk scroll-animate from-right" id="contact">
       <h2>Контакты</h2>
       <p style="color:var(--muted)">Напиши сообщение — или используй быстрые иконки соцсетей ниже.</p>
       <form onsubmit="sendForm(event)" style="margin-top:14px;display:flex;gap:12px;flex-wrap:wrap">
